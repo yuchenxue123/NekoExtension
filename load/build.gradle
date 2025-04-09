@@ -1,0 +1,21 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group = 'com.example'
+version = rootProject.loader_version
+
+shadowJar {
+    setDestinationDirectory(rootProject.file("out/build"))
+    archiveClassifier.set("")
+
+    archiveFileName = "ExampleExtension-${version}.jar"
+
+    from("${rootProject.projectDir}/out/roboto.ttf") {
+        into('assets/font')
+    }
+}
+
+jar {
+    dependsOn 'shadowJar'
+}

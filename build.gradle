@@ -1,0 +1,105 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "$kotlin_version"
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+allprojects {
+    apply {
+        plugin("java")
+        plugin("idea")
+        plugin("kotlin")
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://repo.marcloud.net/releases/'}
+    }
+
+    dependencies {
+        compileOnly('com.github.opai-client:opensource-components:-SNAPSHOT')
+        compileOnly 'org.lwjgl:lwjgl:2.9.4-nightly'
+
+        // Kotlin
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    }
+
+    java {
+        sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    compileJava {
+        options.encoding = 'UTF-8'
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+}
+
+group = 'neko.sm'
+version = project.extension_version
+
+repositories {
+    mavenCentral()
+}
+
+shadowJar {
+    setDestinationDirectory(rootProject.file("out/build"))
+    archiveClassifier.set("")
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+
+    exclude 'META-INF/maven/**'
+    exclude 'META-INF/versions/**'
+}
+
+kotlin {
+    jvmToolchain(8)
+}
+
+tasks.register("toBase64") {
+    dependsOn jar
+
+    doLast {
+        File outputDir = file('out')
+        outputDir.mkdirs()
+
+        File outputFile = file("$outputDir/roboto.ttf")
+        File jarFile = shadowJar.archiveFile.get().asFile
+
+        try (InputStream inputStream = new FileInputStream(jarFile)
+             OutputStream outputStream = new FileOutputStream(outputFile)) {
+
+            byte[] fileBytes = inputStream.getBytes()
+            String base64Content = fileBytes.encodeBase64()
+
+            outputStream.write(base64Content.getBytes())
+            outputStream.close()
+        } catch (IOException e) {
+            throw new GradleException("Failed to convert JAR to Base64", e)
+        }
+    }
+}
+
+jar {
+    dependsOn(shadowJar)
+}
+
+build {
+    dependsOn(toBase64)
+}
+
+clean {
+    // Clean 'out' fold
+    file('out').deleteDir()
+}
+
+tasks.register("package") {
+    group = "build"
+
+    dependsOn(build)
+    // 6
+    finalizedBy(project("load").tasks.named("build"))
+}
