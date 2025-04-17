@@ -22,6 +22,12 @@ fun Double.decimals(n: Int): Double {
     return rounded.toDouble()
 }
 
+fun Float.decimals(n: Int): Float {
+    val bigDecimal = BigDecimal(this.toDouble())
+    val rounded = bigDecimal.setScale(n, RoundingMode.HALF_UP)
+    return rounded.toFloat()
+}
+
 fun Float.toRadians() = this * 0.017453292f
 fun Double.toRadians(): Double = this * 0.017453292519943295
 fun Double.step(step: Double): Double = round(this / step) * step

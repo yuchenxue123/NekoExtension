@@ -5,6 +5,7 @@ import neko.sm.module.modules.render.ModuleSimpleHUD
 import neko.sm.utils.always.projects.TargetProject
 import neko.sm.utils.animation.AnimationType
 import neko.sm.utils.animation.SimpleAnimation
+import neko.sm.utils.extension.decimals
 import neko.sm.utils.extension.step
 import neko.sm.utils.render.RenderUtils
 import neko.sm.widget.PluginWidget
@@ -118,7 +119,7 @@ object TargetWidget : PluginWidget("TargetHUD") {
                     )
 
                     smallFont.drawStringWithShadow(
-                        "Health: $health",
+                        "Health: ${health.step(0.1f).decimals(1)}",
                         x.toDouble() + 6f + 24f + 6f,
                         y.toDouble() + 2f + currentHeight + 6f + font.height,
                         Color.WHITE.rgb
