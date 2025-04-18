@@ -1,0 +1,20 @@
+{
+  "AntiKB": "Mode",
+  "NoFall": "Mode",
+  "NoSlow": "Mode",
+  "Speed": "Mode",
+  "Disabler": "Mode",
+  "KillAura": "Mode",
+  "AntiVoid": "Mode",
+  "Spider": "Mode",
+  "Phase": "Mode",
+  "LongJump": "Mode",
+
+  "AutoArmor": "Delay",
+  "ChestStealer": "Delay",
+  "InvManager": "Delay",
+  "TargetStrafe": "Range",
+
+  "Velocity": "Mode",
+  "AirLine": "Mode"
+}

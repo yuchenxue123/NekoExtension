@@ -2,6 +2,7 @@ package neko.sm.utils.misc
 
 import neko.sm.utils.extension.removeBlank
 import neko.sm.utils.misc.ValueUtils.getValue
+import neko.sm.utils.resources.ResourcesUtils
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.enums.EnumModuleCategory.*
 import today.opai.api.interfaces.modules.PresetModule
@@ -15,36 +16,21 @@ import java.awt.Color
 object ModuleUtils : Accessor {
     private val categoryMap = mutableMapOf<PresetModule, EnumModuleCategory>()
 
-    private val map = mutableMapOf(
-        "AntiKB" to "Mode",
-        "AntiVoid" to "Mode",
-        "NoFall" to "Mode",
-        "NoSlow" to "Mode",
-        "Speed" to "Mode",
-        "Disabler" to "Mode",
-        "KillAura" to "Mode",
-        "Phase" to "Mode",
-        "LongJump" to "Mode",
-        "Spider" to "Mode",
-        "AutoArmor" to "Delay",
-        "ChestStealer" to "Delay",
-        "InvManager" to "Delay",
-        "TargetStrafe" to "Range",
-        // extension
-        "Velocity" to "Mode",
-        "AirLine" to "Mode"
-    )
+    private val suffixData = ResourcesUtils.getAsJson("assets/data/module_suffix.json")
+
     fun getSuffix(module: PresetModule): String {
         val name = module.name.removeBlank()
 
-        if (name !in map.keys) {
-            return ""
-        }
+        val data = suffixData ?: return ""
 
-        val modeValue = getValue(module, map[name]!!)
+        if (data.has(name)) {
+            val suffix = data.get(name).asString
 
-        if (modeValue != null) {
-            return modeValue.value.toString()
+            val modeValue = getValue(module, suffix)
+
+            if (modeValue != null) {
+                return modeValue.value.toString()
+            }
         }
 
         return ""
