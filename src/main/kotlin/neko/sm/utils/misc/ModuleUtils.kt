@@ -20,6 +20,7 @@ object ModuleUtils : Accessor {
         "AntiVoid" to "Mode",
         "NoFall" to "Mode",
         "NoSlow" to "Mode",
+        "Speed" to "Mode",
         "Disabler" to "Mode",
         "KillAura" to "Mode",
         "Phase" to "Mode",
