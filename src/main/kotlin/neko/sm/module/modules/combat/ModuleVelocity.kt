@@ -3,9 +3,10 @@ package neko.sm.module.modules.combat
 import neko.sm.module.PluginModule
 import neko.sm.module.modules.combat.velocity.VelocityCancel
 import neko.sm.utils.extension.cancel
+import neko.sm.utils.packet.server.SPacketVelocity
+import neko.sm.utils.packet.wrap
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.events.EventPacketReceive
-import today.opai.api.interfaces.game.network.server.SPacket12Velocity
 
 /**
  * @author yuchenxue
@@ -24,9 +25,9 @@ object ModuleVelocity : PluginModule(
         ), VelocityCancel)
 
     override fun onPacketReceive(event: EventPacketReceive) {
-        val packet = event.packet
+        val packet = event.packet.wrap()
 
-        if (packet is SPacket12Velocity && packet.entityId == API.localPlayer.entityId) {
+        if (packet is SPacketVelocity && packet.entityId == API.localPlayer.entityId) {
             mode.current.onVelocityReceive(packet) {
                 event.cancel()
             }

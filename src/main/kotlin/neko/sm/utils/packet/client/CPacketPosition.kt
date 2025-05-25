@@ -1,7 +1,6 @@
 package neko.sm.utils.packet.client
 
 import neko.sm.utils.misc.network
-import neko.sm.utils.packet.client.api.AbstractCPacketPlayer
 import today.opai.api.dataset.PositionData
 import today.opai.api.interfaces.dataset.Vector3d
 import today.opai.api.interfaces.game.network.client.CPacket04Position
@@ -13,7 +12,7 @@ import today.opai.api.interfaces.game.network.client.CPacket04Position
 
 class CPacketPosition(
     packet: CPacket04Position
-) : AbstractCPacketPlayer<CPacket04Position>(packet), CPacket04Position {
+) : CPacketPlayer<CPacket04Position>(packet), CPacket04Position {
 
     constructor(
         position: PositionData,

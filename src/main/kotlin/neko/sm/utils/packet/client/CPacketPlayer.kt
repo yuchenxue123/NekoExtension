@@ -1,7 +1,7 @@
 package neko.sm.utils.packet.client
 
 import neko.sm.utils.misc.network
-import neko.sm.utils.packet.client.api.AbstractCPacketPlayer
+import neko.sm.utils.packet.Packet
 import today.opai.api.interfaces.game.network.client.CPacket03Player
 
 /**
@@ -9,11 +9,16 @@ import today.opai.api.interfaces.game.network.client.CPacket03Player
  * @date 2025/05/24
  */
 
-open class CPacketPlayer(
-    packet: CPacket03Player
-) : AbstractCPacketPlayer<CPacket03Player>(packet), CPacket03Player {
+// special
+open class CPacketPlayer<T : CPacket03Player>(
+    packet: T
+) : Packet<T>(packet), CPacket03Player {
 
-    constructor(onGround: Boolean) : this(network.createPlayer(onGround))
+    companion object {
+        fun create(onGround: Boolean) : CPacketPlayer<CPacket03Player> {
+            return CPacketPlayer(network.createPlayer(onGround))
+        }
+    }
 
     override fun isOnGround(): Boolean {
         return packet.isOnGround

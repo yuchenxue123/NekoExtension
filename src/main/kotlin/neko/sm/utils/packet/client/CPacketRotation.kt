@@ -1,7 +1,6 @@
 package neko.sm.utils.packet.client
 
 import neko.sm.utils.misc.network
-import neko.sm.utils.packet.client.api.AbstractCPacketPlayer
 import today.opai.api.dataset.RotationData
 import today.opai.api.interfaces.game.network.client.CPacket05Rotation
 
@@ -12,7 +11,7 @@ import today.opai.api.interfaces.game.network.client.CPacket05Rotation
 
 class CPacketRotation(
     packet: CPacket05Rotation
-) : AbstractCPacketPlayer<CPacket05Rotation>(packet), CPacket05Rotation {
+) : CPacketPlayer<CPacket05Rotation>(packet), CPacket05Rotation {
 
     constructor(
         rotation: RotationData,

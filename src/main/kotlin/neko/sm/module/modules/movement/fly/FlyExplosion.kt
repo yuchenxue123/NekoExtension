@@ -6,10 +6,11 @@ import neko.sm.utils.extension.motionX
 import neko.sm.utils.extension.motionY
 import neko.sm.utils.extension.motionZ
 import neko.sm.utils.move.Movement
+import neko.sm.utils.packet.client.CPacketPlayer
+import neko.sm.utils.packet.server.SPacketExplosion
+import neko.sm.utils.packet.wrap
 import today.opai.api.events.EventPacketReceive
-import today.opai.api.interfaces.game.network.client.CPacket03Player
 import today.opai.api.interfaces.game.network.server.SPacket08SetPosition
-import today.opai.api.interfaces.game.network.server.SPacket27Explosion
 
 /**
  * @author yuchenxue
@@ -53,13 +54,13 @@ object FlyExplosion : FlyMode("Explosion") {
         if (API.isNull) {
             return
         }
-        val packet = event.packet
+        val packet = event.packet.wrap()
 
-        if (packet is SPacket27Explosion) {
+        if (packet is SPacketExplosion) {
             fly = true
         }
 
-        if (packet is CPacket03Player) {
+        if (packet is CPacketPlayer) {
             if (packet.isOnGround && fly) {
                 event.cancel()
                 packet.isOnGround = false
