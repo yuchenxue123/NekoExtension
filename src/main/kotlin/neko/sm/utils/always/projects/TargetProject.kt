@@ -1,7 +1,7 @@
 package neko.sm.utils.always.projects
 
+import neko.sm.client.module.ModuleAccessor
 import neko.sm.utils.always.Project
-import neko.sm.utils.misc.SpecialModules
 import today.opai.api.interfaces.game.entity.LivingEntity
 
 /**
@@ -17,7 +17,7 @@ object TargetProject : Project {
     private val changeHandlers = mutableListOf<(last: LivingEntity?, new: LivingEntity?) -> Unit>()
 
     override fun onTick() {
-        val updatedTarget: LivingEntity? = SpecialModules.KillAura.target
+        val updatedTarget: LivingEntity? = ModuleAccessor.KillAura.target
         if (updatedTarget != target) {
             lastTarget = target
             target = updatedTarget

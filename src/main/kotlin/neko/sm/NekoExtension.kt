@@ -1,13 +1,14 @@
 package neko.sm
 
-import neko.sm.command.CommandManager
+import neko.sm.client.module.ModuleAccessor
+import neko.sm.features.command.CommandManager
+import neko.sm.features.gui.component.ComponentManager
+import neko.sm.features.gui.update.UpdateScreen
+import neko.sm.features.module.ModuleManager
+import neko.sm.features.widget.WidgetManager
 import neko.sm.font.FontManager
-import neko.sm.gui.component.ComponentManager
-import neko.sm.gui.update.UpdateScreen
-import neko.sm.module.ModuleManager
 import neko.sm.utils.always.AlwaysHandler
 import neko.sm.utils.always.ProjectManager
-import neko.sm.widget.WidgetManager
 import today.opai.api.Extension
 import today.opai.api.OpenAPI
 import today.opai.api.annotations.ExtensionInfo
@@ -87,6 +88,7 @@ class NekoExtension : Extension() {
         openAPI = api
 
         FontManager
+        ModuleAccessor
 
         // handler
         ProjectManager
@@ -95,16 +97,16 @@ class NekoExtension : Extension() {
         UpdateScreen.setup()
 
         // module
-        ModuleManager.register()
+        ModuleManager.initialize()
 
         // command
-        CommandManager.register()
+        CommandManager.initialize()
 
         // widget
-        WidgetManager.register()
+        WidgetManager.initialize()
 
         // component
-        ComponentManager
+        ComponentManager.initialize()
 
         // setup
         lateInit()

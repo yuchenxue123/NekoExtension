@@ -1,6 +1,6 @@
 package neko.sm.value.choice
 
-import neko.sm.module.PluginModule
+import neko.sm.features.module.PluginModule
 import neko.sm.utils.always.ProjectManager
 import neko.sm.utils.misc.API
 import neko.sm.value.values.ModeSetting
