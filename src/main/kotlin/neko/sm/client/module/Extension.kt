@@ -31,6 +31,10 @@ fun PresetModule.getNumberValue(name: String): NumberValue?
 fun PresetModule.getTextValue(name: String): TextValue?
     = getValue(name) as? TextValue
 
+fun <T, V : Value<T>> V.set(value: T) {
+    this.value = value
+}
+
 val PresetModule.suffix: String
     get() {
         val suffixValueName = ModuleAccessor.suffix_json.get(name.removeBlank())?.asString ?: ""

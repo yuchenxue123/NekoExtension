@@ -6,6 +6,8 @@ import neko.sm.utils.time.TimeWatch
  * @author yuchenxue
  * @date 2025/02/20
  */
+
+//@Deprecated(message = "We use AnimationSetting to input the config of animation", level = DeprecationLevel.WARNING)
 class SimpleAnimation(private var type: AnimationType) : Animation {
 
     var start = 0f

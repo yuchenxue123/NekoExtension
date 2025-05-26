@@ -1,10 +1,10 @@
 package neko.sm.features.module.modules.render
 
 import neko.sm.client.module.ModuleAccessor
+import neko.sm.client.user.UserAccessor
 import neko.sm.features.module.PluginModule
 import neko.sm.features.module.modules.render.supereyes.nametags.NameTags
 import neko.sm.utils.extension.cancel
-import neko.sm.utils.misc.UserDetector
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.events.EventRender2D
 import today.opai.api.events.EventRenderNameTag
@@ -75,7 +75,7 @@ object ModuleSuperEyes : PluginModule(
                 && ModuleAccessor.AntiCheat.isEnabled
 
         val isFriend = API.isFriend(player.name)
-        val username = UserDetector.getUserPlayer(player).username
+        val username = UserAccessor.getUserPlayer(player).username
 
         val prefix1 = if (isFriend) "§a(Friend)§r " else ""
         val prefix2 = if (isHacker) "§c(Hacker)§r " else ""

@@ -1,13 +1,14 @@
-package neko.sm.utils.misc
+package neko.sm.client.user
 
+import neko.sm.utils.misc.Accessor
 import today.opai.api.interfaces.game.entity.Player
 
 /**
  * @author yuchenxue
- * @date 2025/03/05
+ * @date 2025/05/27
  */
 
-object UserDetector : Accessor {
+object UserAccessor : Accessor {
     private val players = mutableListOf<UserPlayer>()
 
     fun getUserPlayer(player: Player): UserPlayer {

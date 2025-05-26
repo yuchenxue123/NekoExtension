@@ -1,7 +1,9 @@
 package neko.sm.features.module.modules.misc
 
+import neko.sm.client.module.ModuleAccessor
+import neko.sm.client.module.getModeValue
+import neko.sm.client.module.set
 import neko.sm.features.module.PluginModule
-import neko.sm.utils.misc.ValueUtils.setModeValue
 import neko.sm.utils.time.TimeWatch
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.interfaces.modules.PresetModule
@@ -25,17 +27,17 @@ object ModuleHelper : PluginModule(
     private val watch = TimeWatch()
 
     override fun onKey(keyCode: Int) {
-        val longJump = API.moduleManager.getModule("LongJump")
+        val longJump = ModuleAccessor.LongJump
 
         if (jump && !longJump.isEnabled) {
             if (keyCode == fireBallBind) {
-                setModeValue(longJump, "Mode", "Watchdog Fireball")
+                longJump.getModeValue("Mode")?.set("Watchdog Fireball")
                 setState(longJump, true)
                 checkNoMove = true
             }
 
             if (keyCode == damageBind) {
-                setModeValue(longJump, "Mode", "Watchdog Damage")
+                longJump.getModeValue("Mode")?.set("Watchdog Damage")
                 setState(longJump, true)
                 checkNoMove = false
             }
