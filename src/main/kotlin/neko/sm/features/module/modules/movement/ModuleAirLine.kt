@@ -18,11 +18,4 @@ object ModuleAirLine : PluginModule(
         arrayOf(
             FlyExplosion
         ))
-
-    override fun getSuffix(): String {
-        return mode.current.modeName
-    }
-
-
-
 }

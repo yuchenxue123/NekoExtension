@@ -21,7 +21,7 @@ object ModuleSuperEyes : PluginModule(
     EnumModuleCategory.VISUAL
 ) {
     private val name by boolean("Name Tags", true)
-    private val nameTagStyle = enum("Name Tag Style", NameTags.SIMPLE) { name }
+    private val nameTagStyle by enum("Name Tag Style", NameTags.SIMPLE) { name }
     // options
     private val clear by boolean("Clear Name", false) { name }
     private val checkLong by boolean("Check Long IRC", true) { name }
@@ -67,7 +67,7 @@ object ModuleSuperEyes : PluginModule(
     }
 
     private fun renderNameTag(player: Player) {
-        nameTagStyle.current.render(player)
+        nameTagStyle.render(player)
     }
 
     fun getRenderName(player: Player): String {

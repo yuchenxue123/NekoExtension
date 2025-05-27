@@ -1,8 +1,6 @@
 package neko.sm.value
 
 import today.opai.api.interfaces.modules.Value
-import java.util.function.BooleanSupplier
-import java.util.function.Consumer
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -11,58 +9,15 @@ import kotlin.reflect.KProperty
  * @date 2025/03/06
  */
 
-open class Setting<V, T : Value<V>>(
-    val inner: T,
-) : Value<V>, ReadWriteProperty<Any?, V> {
+open class Setting<T, V : Value<T>>(
+    inner: V,
+) : SettingWrapper<T, V>(inner), ReadWriteProperty<Any?, T> {
 
-    private val displayableConditions = mutableListOf<() -> Boolean>()
-
-    override fun getValue(): V {
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return inner.value
     }
 
-    override fun setValue(value: V) {
-        inner.value = value
-    }
-
-    override fun getName(): String {
-        return inner.name
-    }
-
-    override fun getDescription(): String {
-        return "NONE"
-    }
-
-    /**
-     * Set hidden
-     */
-    override fun setHiddenPredicate(hidden: BooleanSupplier) {
-        inner.setHiddenPredicate(hidden)
-    }
-
-    /**
-     * Set displayable
-     */
-    fun setDisplayable(displayable: () -> Boolean) = apply {
-        displayableConditions.add(displayable)
-        updateDisplayable()
-    }
-
-    private fun updateDisplayable() {
-        inner.setHiddenPredicate {
-            !displayableConditions.all { it.invoke() }
-        }
-    }
-
-    override fun setValueCallback(callback: Consumer<V>) {
-        inner.setValueCallback(callback)
-    }
-
-    override fun getValue(thisRef: Any?, property: KProperty<*>): V {
-        return inner.value
-    }
-
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: V) {
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
         this.inner.value = value
     }
 }

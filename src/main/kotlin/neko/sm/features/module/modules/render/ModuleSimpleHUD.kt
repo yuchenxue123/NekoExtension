@@ -23,7 +23,7 @@ object ModuleSimpleHUD : PluginModule(
     // ModuleList
     val array by boolean("Array List", true)
 
-    val sortMode = enum("Sort Mode", SortMode.WIDTH) { array }
+    val sortMode by enum("Sort Mode", SortMode.WIDTH) { array }
 
     enum class SortMode(override val modeName: String) : SubMode {
         WIDTH("Width"),
@@ -36,7 +36,7 @@ object ModuleSimpleHUD : PluginModule(
 
     // Notification
     val notification by boolean("Notification", true)
-    val notificationType = enum("Notification Type", NotificationType.SIMPLE) { notification }
+    val notificationType by enum("Notification Type", NotificationType.SIMPLE) { notification }
 
     enum class NotificationType(override val modeName: String) : SubMode {
         SIMPLE("Simple"),

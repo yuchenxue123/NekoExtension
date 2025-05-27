@@ -37,7 +37,7 @@ open class PluginModule(
         val create = API.valueManager.createBoolean(name, value)
 
         val tsf = BooleanSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -60,7 +60,7 @@ open class PluginModule(
         val create = API.valueManager.createModes(name, value, modes)
 
         val tsf = ModeSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -101,7 +101,7 @@ open class PluginModule(
             .setSuffix(suffix)
 
         val tsf = NumberSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -129,7 +129,7 @@ open class PluginModule(
             .setSuffix(suffix)
 
         val tsf = NumberSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -145,7 +145,7 @@ open class PluginModule(
         val create = API.valueManager.createLabel(name)
 
         val tsf = LabelSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -167,7 +167,7 @@ open class PluginModule(
         val create = API.valueManager.createInput(name, text)
 
         val tsf = TextSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -189,7 +189,7 @@ open class PluginModule(
         val create = API.valueManager.createKeyBind(name, defaultBind)
 
         val tsf = BindSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -211,7 +211,7 @@ open class PluginModule(
         val create = API.valueManager.createColor(name, color)
 
         val tsf = ColorSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         addValues(create)
         return tsf
@@ -231,7 +231,7 @@ open class PluginModule(
         addValues(it.inner)
         it.choices.forEach { choice ->
             choice.values.forEach { value ->
-                value.setDisplayable(displayable).setDisplayable {
+                value.displayable(displayable).displayable {
                     it.current.modeName == choice.modeName
                 }
                 addValues(value.inner)

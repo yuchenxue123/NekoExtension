@@ -56,7 +56,7 @@ object ModuleListComponent : Component {
     }
 
     private fun sort() {
-        when (ModuleSimpleHUD.sortMode.current) {
+        when (ModuleSimpleHUD.sortMode) {
             SortMode.WIDTH -> {
                 elements.sortWith(compareBy { -it.width })
             }

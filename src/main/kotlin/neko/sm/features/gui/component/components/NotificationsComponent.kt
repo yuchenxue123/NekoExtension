@@ -168,7 +168,7 @@ object NotificationsComponent : Component {
             }
 
             // 绘制
-            when(ModuleSimpleHUD.notificationType.current) {
+            when(ModuleSimpleHUD.notificationType) {
                 SIMPLE -> {
                     API.renderUtil.drawRect(
                         xPos,
@@ -243,14 +243,14 @@ object NotificationsComponent : Component {
         }
 
         private fun getCurrentHeight(): Float {
-            return when (ModuleSimpleHUD.notificationType.current) {
+            return when (ModuleSimpleHUD.notificationType) {
                 SIMPLE -> 20f
                 BLACK -> 28f
             }
         }
 
         private fun getCurrentWidth(): Float {
-            return when (ModuleSimpleHUD.notificationType.current) {
+            return when (ModuleSimpleHUD.notificationType) {
                 SIMPLE -> font.getWidth(context) + 16f
                 BLACK -> max(font.getWidth(module.name) + icons.getWidth(iconText) + 4f + 16f, 120f)
             }

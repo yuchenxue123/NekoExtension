@@ -11,7 +11,7 @@ import java.awt.Color
  */
 
 open class Configurable : Accessor {
-    val values = mutableListOf<Setting<*,*>>()
+    val values = mutableListOf<SettingWrapper<*,*>>()
 
     /**
      * Create a [BooleanSetting]
@@ -24,7 +24,7 @@ open class Configurable : Accessor {
         val create = API.valueManager.createBoolean(name, value)
 
         val tsf = BooleanSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         values.add(tsf)
         return tsf
@@ -198,7 +198,7 @@ open class Configurable : Accessor {
         val create = API.valueManager.createColor(name, color)
 
         val tsf = ColorSetting(create)
-        tsf.setDisplayable(displayable)
+        tsf.displayable(displayable)
 
         values.add(tsf)
         return tsf
