@@ -12,13 +12,13 @@ object FontManager : Accessor {
     private const val ICONS_PATH = "assets/font/icons.ttf"
 
     // client
-    val MINECRAFT = CustomFontRenderer.of(API.fontUtil.vanillaFont)
-    val GOOGLE_16 = CustomFontRenderer.of(API.fontUtil.googleSans16)
-    val GOOGLE_18 = CustomFontRenderer.of(API.fontUtil.googleSans18)
-    val GOOGLE_B16 = CustomFontRenderer.of(API.fontUtil.googleSansB16)
-    val GOOGLE_B18 = CustomFontRenderer.of(API.fontUtil.googleSansB18)
-    val PRODUCT_18 = CustomFontRenderer.of(API.fontUtil.product18)
-    val TOHOMA_18 = CustomFontRenderer.of(API.fontUtil.tahoma18)
+    val MINECRAFT = FontWrapper.of(API.fontUtil.vanillaFont)
+    val GOOGLE_16 = FontWrapper.of(API.fontUtil.googleSans16)
+    val GOOGLE_18 = FontWrapper.of(API.fontUtil.googleSans18)
+    val GOOGLE_B16 = FontWrapper.of(API.fontUtil.googleSansB16)
+    val GOOGLE_B18 = FontWrapper.of(API.fontUtil.googleSansB18)
+    val PRODUCT_18 = FontWrapper.of(API.fontUtil.product18)
+    val TOHOMA_18 = FontWrapper.of(API.fontUtil.tahoma18)
 
     // extension
     // roboto
@@ -33,9 +33,9 @@ object FontManager : Accessor {
     val ICONS_24 = getFont(ICONS_PATH, 24f)
     val ICONS_32 = getFont(ICONS_PATH, 32f)
 
-    private fun getFont(path: String, size: Float): CustomFontRenderer {
+    private fun getFont(path: String, size: Float): FontWrapper {
         val resourceAsStream = this.javaClass.classLoader.getResourceAsStream(path)
         val createFont = API.fontUtil.createFont(resourceAsStream, size)
-        return CustomFontRenderer.of(createFont)
+        return FontWrapper.of(createFont)
     }
 }

@@ -7,10 +7,10 @@ import today.opai.api.interfaces.render.Font
  * @date 2025/03/07
  */
 
-class CustomFontRenderer(private val font: Font) {
+class FontWrapper(private val font: Font) : Font {
     companion object {
-        fun of(font: Font): CustomFontRenderer {
-            return CustomFontRenderer(font)
+        fun of(font: Font): FontWrapper {
+            return FontWrapper(font)
         }
     }
 
@@ -18,7 +18,7 @@ class CustomFontRenderer(private val font: Font) {
         return drawString(text, x.toDouble(), y.toDouble(), color)
     }
 
-    fun drawString(text: String, x: Double, y: Double, color: Int): Float {
+    override fun drawString(text: String, x: Double, y: Double, color: Int): Float {
         return font.drawString(text, x - 1, y, color)
     }
 
@@ -26,7 +26,7 @@ class CustomFontRenderer(private val font: Font) {
         return drawStringWithShadow(text, x.toDouble(), y.toDouble(), color)
     }
 
-    fun drawStringWithShadow(text: String, x: Double, y: Double, color: Int): Float {
+    override fun drawStringWithShadow(text: String, x: Double, y: Double, color: Int): Float {
         return font.drawStringWithShadow(text, x - 1, y, color)
     }
 
@@ -34,25 +34,26 @@ class CustomFontRenderer(private val font: Font) {
         return drawCenteredString(text, x.toDouble(), y.toDouble(), color)
     }
 
-    fun drawCenteredString(text: String, x: Double, y: Double, color: Int): Float {
+    override fun drawCenteredString(text: String, x: Double, y: Double, color: Int): Float {
         return font.drawCenteredString(text, x - 1, y, color)
     }
 
     /**
      * 为什么这个没有返回值
      */
-    fun drawCenteredStringWithShadow(text: String, x: Double, y: Double, color: Int) {
+    override fun drawCenteredStringWithShadow(text: String, x: Double, y: Double, color: Int) {
         return font.drawCenteredStringWithShadow(text, x - 1, y, color)
     }
 
-    fun getWidth(text: String): Int {
+    override fun getWidth(text: String): Int {
         return font.getWidth(text)
     }
 
-    val height: Int
-        get() = font.height
+    override fun getHeight(): Int {
+        return font.height
+    }
 
-    fun close() {
+    override fun close() {
         font.close()
     }
 }
