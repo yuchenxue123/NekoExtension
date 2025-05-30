@@ -25,7 +25,7 @@ class NekoExtension : Extension() {
         lateinit var openAPI: OpenAPI
         const val EXTENSION_NAME = "Neko"
         // 每次更新 +1
-        const val EXTENSION_VERSION = 17
+        const val EXTENSION_VERSION = 18
 
         lateinit var UPDATE_LOG: String
     }
