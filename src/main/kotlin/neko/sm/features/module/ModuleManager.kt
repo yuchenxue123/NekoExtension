@@ -42,7 +42,5 @@ object ModuleManager : Register<PluginModule>, Accessor {
         modules.add(module)
     }
 
-    override fun toString(): String {
-        return modules.joinToString(", ") { it.name }
-    }
+    override fun toString(): String = modules.joinToString(", ") { it.name }
 }
