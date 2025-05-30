@@ -3,7 +3,7 @@ package neko.sm.features.gui.component
 import neko.sm.features.gui.component.components.ModuleListComponent
 import neko.sm.features.gui.component.components.NotificationsComponent
 import neko.sm.features.gui.component.components.WatermarkComponent
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.events.EventRender2D
 
 /**

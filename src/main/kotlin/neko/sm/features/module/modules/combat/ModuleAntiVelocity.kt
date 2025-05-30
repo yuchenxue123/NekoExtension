@@ -1,7 +1,8 @@
 package neko.sm.features.module.modules.combat
 
 import neko.sm.features.module.PluginModule
-import neko.sm.features.module.modules.combat.velocity.VelocityCancel
+import neko.sm.features.module.modules.combat.velocity.AntiVelocityBlocksMC
+import neko.sm.features.module.modules.combat.velocity.AntiVelocityCancel
 import neko.sm.utils.extension.cancel
 import neko.sm.utils.packet.server.SPacketVelocity
 import neko.sm.utils.packet.wrap
@@ -13,16 +14,17 @@ import today.opai.api.events.EventPacketReceive
  * @date 2025/03/13
  */
 
-object ModuleVelocity : PluginModule(
-    "Velocity",
+object ModuleAntiVelocity : PluginModule(
+    "Anti Velocity",
     "Reduce your knock back.",
     EnumModuleCategory.COMBAT
 ) {
 
     val mode = choices("Mode",
         arrayOf(
-            VelocityCancel
-        ), VelocityCancel
+            AntiVelocityCancel,
+            AntiVelocityBlocksMC,
+        ), AntiVelocityCancel
     )
 
     override fun onPacketReceive(event: EventPacketReceive) {

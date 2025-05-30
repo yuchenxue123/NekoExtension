@@ -2,14 +2,15 @@ package neko.sm.features.command
 
 import neko.sm.features.command.commands.BindsCommand
 import neko.sm.features.command.commands.UpdateCommand
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
+import neko.sm.utils.interfaces.Register
 
 /**
  * @author yuchenxue
  * @date 2025/03/13
  */
 
-object CommandManager : Accessor {
+object CommandManager : Register<PluginCommand>, Accessor {
     private val commands = mutableListOf<PluginCommand>()
 
     fun initialize() {
@@ -21,8 +22,8 @@ object CommandManager : Accessor {
         commands.forEach(this::register)
     }
 
-    private fun register(command: PluginCommand) {
-        API.registerFeature(command)
+    override fun register(element: PluginCommand) {
+        API.registerFeature(element)
     }
 
     private fun add(command: PluginCommand) {

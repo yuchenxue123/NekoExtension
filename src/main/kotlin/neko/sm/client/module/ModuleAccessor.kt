@@ -1,6 +1,6 @@
 package neko.sm.client.module
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import neko.sm.utils.resources.AssetsManager
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.features.ExtensionModule
@@ -17,12 +17,12 @@ object ModuleAccessor : ModuleManager, Accessor {
     val LongJump: PresetModule = getModule("LongJump")
 
     // Special
-    val AntiCheat: ModuleAntiCheat = API.moduleManager.getModule("AntiCheat") as ModuleAntiCheat
-    val AntiBot: ModuleAntiBot = API.moduleManager.getModule("AntiBot") as ModuleAntiBot
-    val KillAura: ModuleKillAura = API.moduleManager.getModule("KillAura") as ModuleKillAura
-    val Disabler: ModuleDisabler = API.moduleManager.getModule("Disabler") as ModuleDisabler
-    val Teams: ModuleTeams = API.moduleManager.getModule("Teams") as ModuleTeams
-    val HeightLimit: ModuleHeightLimit = API.moduleManager.getModule("HeightLimit") as ModuleHeightLimit
+    val AntiCheat: ModuleAntiCheat = getModule("AntiCheat") as ModuleAntiCheat
+    val AntiBot: ModuleAntiBot = getModule("AntiBot") as ModuleAntiBot
+    val KillAura: ModuleKillAura = getModule("KillAura") as ModuleKillAura
+    val Disabler: ModuleDisabler = getModule("Disabler") as ModuleDisabler
+    val Teams: ModuleTeams = getModule("Teams") as ModuleTeams
+    val HeightLimit: ModuleHeightLimit = getModule("HeightLimit") as ModuleHeightLimit
 
     // suffix
     val suffix_json = AssetsManager.getDataAsJsonObject("module_suffix.json")

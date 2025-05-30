@@ -4,7 +4,7 @@ import neko.sm.utils.extension.motionX
 import neko.sm.utils.extension.motionY
 import neko.sm.utils.extension.motionZ
 import neko.sm.utils.extension.toRadians
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.enums.EnumKeybind
 import kotlin.math.cos
 import kotlin.math.sin

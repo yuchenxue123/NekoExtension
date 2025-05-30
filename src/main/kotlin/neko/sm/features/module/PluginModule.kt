@@ -1,6 +1,6 @@
 package neko.sm.features.module
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import neko.sm.value.SubMode
 import neko.sm.value.choice.Choice
 import neko.sm.value.choice.ChoicesSetting

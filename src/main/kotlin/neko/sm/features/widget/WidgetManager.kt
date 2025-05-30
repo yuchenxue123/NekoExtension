@@ -3,6 +3,7 @@ package neko.sm.features.widget
 import neko.sm.features.widget.widgets.PotionsWidget
 import neko.sm.features.widget.widgets.ScoreboardWidget
 import neko.sm.features.widget.widgets.TargetWidget
+import neko.sm.utils.interfaces.Register
 import neko.sm.utils.misc.API
 
 /**
@@ -10,7 +11,7 @@ import neko.sm.utils.misc.API
  * @date 2025/03/13
  */
 
-object WidgetManager {
+object WidgetManager : Register<PluginWidget> {
     private val widgets = arrayListOf<PluginWidget>()
 
     fun initialize() {
@@ -23,8 +24,8 @@ object WidgetManager {
         widgets.forEach(this::register)
     }
 
-    private fun register(widget: PluginWidget) {
-        API.registerFeature(widget)
+    override fun register(element: PluginWidget) {
+        API.registerFeature(element)
     }
 
     private fun add(widget: PluginWidget) {

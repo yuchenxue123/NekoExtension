@@ -1,6 +1,6 @@
 package neko.sm.font
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 
 /**
  * @author yuchenxue

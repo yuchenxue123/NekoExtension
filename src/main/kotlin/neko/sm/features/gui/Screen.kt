@@ -1,6 +1,6 @@
 package neko.sm.features.gui
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.events.EventRender2D
 
 /**

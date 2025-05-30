@@ -1,6 +1,6 @@
 package neko.sm.client.user
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.interfaces.game.entity.Player
 
 /**

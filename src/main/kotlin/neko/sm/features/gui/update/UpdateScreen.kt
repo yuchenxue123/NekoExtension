@@ -2,7 +2,7 @@ package neko.sm.features.gui.update
 
 import neko.sm.NekoExtension
 import neko.sm.utils.always.projects.WorldProject
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import neko.sm.utils.misc.ExtensionVersion
 import neko.sm.utils.render.FontUtils.drawSplitString
 import neko.sm.utils.time.TimeWatch

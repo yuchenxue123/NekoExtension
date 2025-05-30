@@ -1,6 +1,6 @@
 package neko.sm.utils.render
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.interfaces.modules.PresetModule
 import java.awt.Color
 import java.util.*

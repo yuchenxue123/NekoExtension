@@ -1,6 +1,6 @@
 package neko.sm.utils.always
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.enums.EnumNotificationType
 import today.opai.api.events.*
 import today.opai.api.interfaces.EventHandler

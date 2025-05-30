@@ -1,6 +1,6 @@
 package neko.sm.utils.render
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.interfaces.render.Font
 import java.awt.Color
 

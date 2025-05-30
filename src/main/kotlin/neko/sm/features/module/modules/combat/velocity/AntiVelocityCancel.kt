@@ -7,7 +7,7 @@ import today.opai.api.interfaces.game.network.server.SPacket12Velocity
  * @date 2025/03/13
  */
 
-object VelocityCancel : VelocityMode("Cancel") {
+object AntiVelocityCancel : AntiVelocityMode("Cancel") {
     override fun onVelocityReceive(packet: SPacket12Velocity, cancel: () -> Unit) {
         cancel.invoke()
     }

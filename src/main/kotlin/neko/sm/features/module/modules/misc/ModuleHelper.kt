@@ -4,6 +4,7 @@ import neko.sm.client.module.ModuleAccessor
 import neko.sm.client.module.getModeValue
 import neko.sm.client.module.set
 import neko.sm.features.module.PluginModule
+import neko.sm.utils.annotation.DontRegister
 import neko.sm.utils.time.TimeWatch
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.interfaces.modules.PresetModule
@@ -13,6 +14,7 @@ import today.opai.api.interfaces.modules.PresetModule
  * @date 2025/02/27
  */
 
+@DontRegister(reason = "Damage long jump patched.")
 object ModuleHelper : PluginModule(
     "Helper",
     "Many helpers",

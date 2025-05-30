@@ -1,4 +1,4 @@
-package neko.sm.utils.misc
+package neko.sm.utils.interfaces
 
 import neko.sm.NekoExtension
 import today.opai.api.OpenAPI

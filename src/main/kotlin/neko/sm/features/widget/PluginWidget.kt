@@ -1,6 +1,6 @@
 package neko.sm.features.widget
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import today.opai.api.features.ExtensionWidget
 
 /**

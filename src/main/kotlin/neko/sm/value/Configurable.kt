@@ -1,6 +1,6 @@
 package neko.sm.value
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import neko.sm.value.values.*
 import today.opai.api.interfaces.modules.values.ColorValue
 import java.awt.Color

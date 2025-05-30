@@ -1,6 +1,7 @@
 package neko.sm.utils.misc
 
 import neko.sm.NekoExtension
+import neko.sm.utils.interfaces.Accessor
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

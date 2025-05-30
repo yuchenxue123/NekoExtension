@@ -1,6 +1,6 @@
 package neko.sm.utils.render
 
-import neko.sm.utils.misc.Accessor
+import neko.sm.utils.interfaces.Accessor
 import org.lwjgl.opengl.GL11.*
 import today.opai.api.interfaces.game.entity.Player
 import java.awt.Color
