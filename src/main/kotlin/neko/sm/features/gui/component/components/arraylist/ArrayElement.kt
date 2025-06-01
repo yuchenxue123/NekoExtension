@@ -74,8 +74,8 @@ class SimpleArrayElement(
     private val showX: Float = renderX
 
     // animation
-    private val animationX = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(200f).forceFinish()
-    private val animationY = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(200f).forceFinish()
+    private val animationX = SimpleAnimation.create().type(AnimationType.QUAD_OUT).duration(200f).finish()
+    private val animationY = SimpleAnimation.create().type(AnimationType.QUAD_OUT).duration(200f).finish()
 
     // state
     private var state = false
@@ -84,7 +84,7 @@ class SimpleArrayElement(
         update()
 
         if (renderX <= hideX) {
-            animationY.forceFinish()
+            animationY.finish()
         }
 
         renderX = animationX.animate()
@@ -131,25 +131,25 @@ class SimpleArrayElement(
 
         if (newState == state) {
              if (state) {
-                animationX.setTarget(showX)
+                animationX.target(showX)
             } else {
-                animationX.setTarget(hideX)
+                animationX.target(hideX)
             }
             return
         }
 
         if (newState) {
             if (animationX.target != showX) {
-                animationX.setType(AnimationType.QUAD_OUT)
-                    .setStart(renderX)
-                    .setTarget(showX)
+                animationX.type(AnimationType.QUAD_OUT)
+                    .start(renderX)
+                    .target(showX)
                     .reset()
             }
         } else {
             if (animationX.target != hideX) {
-                animationX.setType(AnimationType.QUAD_IN)
-                    .setStart(renderX)
-                    .setTarget(hideX)
+                animationX.type(AnimationType.QUAD_IN)
+                    .start(renderX)
+                    .target(hideX)
                     .reset()
             }
         }
@@ -163,6 +163,6 @@ class SimpleArrayElement(
         if (renderY == animationY.target || renderY == this.renderY) {
             return
         }
-        animationY.setStart(this.renderY).setTarget(renderY).reset()
+        animationY.start(this.renderY).target(renderY).reset()
     }
 }

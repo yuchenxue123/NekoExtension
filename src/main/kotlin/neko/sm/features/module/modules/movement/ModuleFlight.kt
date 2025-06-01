@@ -1,7 +1,7 @@
 package neko.sm.features.module.modules.movement
 
 import neko.sm.features.module.PluginModule
-import neko.sm.features.module.modules.movement.fly.FlyExplosion
+import neko.sm.features.module.modules.movement.flight.FlightExplosion
 import today.opai.api.enums.EnumModuleCategory
 
 /**
@@ -9,13 +9,13 @@ import today.opai.api.enums.EnumModuleCategory
  * @date 2025/03/15
  */
 
-object ModuleAirLine : PluginModule(
-    "Air Line",
-    "fly in sky.",
+object ModuleFlight : PluginModule(
+    "Flight",
+    "Fly in sky.",
     EnumModuleCategory.MOVEMENT
 ) {
     val mode = choices("Mode",
         arrayOf(
-            FlyExplosion
+            FlightExplosion
         ))
 }

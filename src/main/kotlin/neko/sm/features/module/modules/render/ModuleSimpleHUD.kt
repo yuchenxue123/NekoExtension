@@ -46,7 +46,9 @@ object ModuleSimpleHUD : PluginModule(
     // widgets
     val scoreboard by boolean("Scoreboard", false)
     val potions by boolean("Potions", false)
-    val target by boolean("Target", true)
+
+    val target by boolean("Target HUD", true)
+    val targetOpacity by number("Target Hud Opacity", 0.8, 0.1, 1.0, 0.1) { target }
 
     override fun onRender2D(event: EventRender2D) {
         ComponentManager.render(event)

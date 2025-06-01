@@ -5,7 +5,7 @@ import neko.sm.utils.always.projects.WorldProject
 import neko.sm.utils.interfaces.Accessor
 import neko.sm.utils.misc.ExtensionVersion
 import neko.sm.utils.render.FontUtils.drawSplitString
-import neko.sm.utils.time.TimeWatch
+import neko.sm.utils.time.TimeTracker
 import today.opai.api.events.EventRender2D
 import today.opai.api.interfaces.EventHandler
 import java.awt.Color
@@ -21,7 +21,7 @@ object UpdateScreen : EventHandler, Accessor {
 
     private var disable = false
 
-    private val watch = TimeWatch()
+    private val watch = TimeTracker()
 
     private fun enable() {
         version = ExtensionVersion.getVersion()
@@ -48,7 +48,7 @@ object UpdateScreen : EventHandler, Accessor {
     }
 
     override fun onKey(keyCode: Int) {
-        if (watch.hasPassTime(8000L) && display && keyCode == 16) {
+        if (watch.hasPassedTime(8000L) && display && keyCode == 16) {
             disable = true
         }
     }
@@ -71,7 +71,7 @@ object UpdateScreen : EventHandler, Accessor {
         val halfWidth = event.windowResolution.width / 2f
         val halfHeight = event.windowResolution.height / 2f
 
-        val under = if (watch.hasPassTime(8000L)) "按Q键关闭" else "等待" + watch.hasLeftTime(8000L) / 1000L + "秒..."
+        val under = if (watch.hasPassedTime(8000L)) "按Q键关闭" else "等待" + watch.getRemainingTime(8000L) / 1000L + "秒..."
 
         val text = "${NekoExtension.UPDATE_LOG}\n$under"
 

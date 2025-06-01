@@ -20,7 +20,7 @@ object NewUpdateScreen : PluginScreen() {
         var halfWidth = 0f
         var halfHeight = 0f
 
-        ScreenProject.screen?.let {
+        ScreenProject.resolution?.let {
             halfWidth = it.width / 2f
             halfHeight = it.height / 2f
         } ?: return

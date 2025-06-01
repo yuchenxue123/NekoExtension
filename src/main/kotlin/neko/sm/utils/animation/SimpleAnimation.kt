@@ -1,68 +1,85 @@
 package neko.sm.utils.animation
 
-import neko.sm.utils.time.TimeWatch
+import neko.sm.utils.time.TimeTracker
 
 /**
  * @author yuchenxue
  * @date 2025/02/20
  */
 
-//@Deprecated(message = "We use AnimationSetting to input the config of animation", level = DeprecationLevel.WARNING)
-class SimpleAnimation(private var type: AnimationType) : Animation {
+class SimpleAnimation : Animation<Float, SimpleAnimation> {
 
-    var start = 0f
-        private set
-    var target = 0f
-        private set
-    var duration= 200f
+    companion object {
+        fun create(): SimpleAnimation {
+            return SimpleAnimation()
+        }
+    }
+
+    /**
+     * Animation type
+     */
+    var type: AnimationType = AnimationType.NONE
         private set
 
-    val watch: TimeWatch = TimeWatch()
+    /**
+     * The animation start value.
+     */
+    var start: Float = 0f
+        private set
 
+    /**
+     * The animation target value.
+     */
+    var target: Float = 0f
+        private set
+
+    /**
+     * The duration we complete the animation.
+     */
+    var duration: Float = 200f
+        private set
+
+
+    fun type(type: AnimationType) = apply {
+        this.type = type
+    }
+
+    fun start(start: Float) = apply {
+        this.start = start
+    }
+
+    fun target(target: Float) = apply {
+        this.target = target
+    }
+
+    fun duration(duration: Float) = apply {
+        this.duration = duration
+    }
+
+    val tracker: TimeTracker = TimeTracker()
     private var finished = false
 
     override fun animate(): Float {
-        val time = watch.passTime / duration
-        val result = start + (target - start) * type.apply(time)
-
-//        if (abs(result - target) <= 0.01) {
-//            finished = true;
-//            return target;
-//        }
-
         if (hasFinished()) {
             return target
         }
+
+        val time = tracker.elapsed / duration
+        val result = start + (target - start) * type.apply(time)
 
         return result
     }
 
     override fun hasFinished(): Boolean {
-        return watch.passTime >= duration || finished
+        return tracker.elapsed >= duration || finished
     }
 
-    fun setStart(start: Float) = apply {
-        this.start = start
-    }
-
-    fun setTarget(target: Float) = apply {
-        this.target = target
-    }
-
-    fun setDuration(duration: Float) = apply {
-        this.duration = duration
-    }
-
-    fun setType(type: AnimationType) = apply {
-        this.type = type
-    }
-
-    fun reset() = apply {
-        watch.reset()
+    override fun reset() = apply {
+        tracker.reset()
         finished = false
     }
 
-    fun forceFinish() = apply {
+    override fun finish() = apply {
         finished = true
     }
 

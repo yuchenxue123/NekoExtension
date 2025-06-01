@@ -16,5 +16,5 @@ abstract class Choice(override val modeName: String) : Project, SubMode, Configu
     open fun disable() {}
 
     override val isRunning: Boolean
-        get() = parent.current == this && parent.parent.isEnabled
+        get() = parent.get() == this && parent.controller.isEnabled
 }

@@ -132,8 +132,8 @@ object ArrayComponent : Component {
         val height = font.height + 2f
 
         // animation
-        private val animationX = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(200f)
-        private val animationY = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(200f)
+        private val animationX = SimpleAnimation.create().type(AnimationType.QUAD_OUT)
+        private val animationY = SimpleAnimation.create().type(AnimationType.QUAD_OUT)
 
         // state
         private var state = false
@@ -156,7 +156,7 @@ object ArrayComponent : Component {
 
             if (xPos <= hideX) {
                 // 直接从正确位置出来
-                animationY.forceFinish()
+                animationY.finish()
             }
             xPos = animationX.animate()
             yPos = animationY.animate()
@@ -191,7 +191,7 @@ object ArrayComponent : Component {
             if (y == targetY || y == yPos) {
                 return
             }
-            animationY.setStart(yPos).setTarget(y).reset()
+            animationY.start(yPos).target(y).reset()
             targetY = y
         }
 
@@ -204,16 +204,16 @@ object ArrayComponent : Component {
 
             if (state) {
                 if (animationX.target != renderX) {
-                    animationX.setType(AnimationType.QUAD_OUT)
-                        .setStart(xPos)
-                        .setTarget(showX)
+                    animationX.type(AnimationType.QUAD_OUT)
+                        .start(xPos)
+                        .target(showX)
                         .reset()
                 }
             } else {
                 if (animationX.target != -width - 10f) {
-                    animationX.setType(AnimationType.QUAD_IN)
-                        .setStart(xPos)
-                        .setTarget(hideX)
+                    animationX.type(AnimationType.QUAD_IN)
+                        .start(xPos)
+                        .target(hideX)
                         .reset()
                 }
             }

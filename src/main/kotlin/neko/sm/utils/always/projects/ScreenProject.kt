@@ -1,5 +1,7 @@
 package neko.sm.utils.always.projects
 
+import neko.sm.event.EventManager
+import neko.sm.event.events.ScreenResizeEvent
 import neko.sm.utils.always.Project
 import today.opai.api.events.EventRender2D
 import today.opai.api.interfaces.render.WindowResolution
@@ -11,9 +13,17 @@ import today.opai.api.interfaces.render.WindowResolution
 
 object ScreenProject : Project {
 
-    var screen: WindowResolution? = null
+    var resolution: WindowResolution? = null
 
     override fun onRender2D(event: EventRender2D) {
-        screen = event.windowResolution
+        val resolution = event.windowResolution
+
+        val last = this.resolution
+
+        if (last == null || (resolution.width != last.width || resolution.height != last.height)) {
+            EventManager.dispatch(ScreenResizeEvent(resolution))
+        }
+
+        this.resolution = resolution
     }
 }

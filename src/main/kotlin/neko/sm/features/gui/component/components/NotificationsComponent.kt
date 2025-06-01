@@ -97,22 +97,22 @@ object NotificationsComponent : Component {
             get() = getCurrentHeight()
 
         // animation
-        private val showAnimation = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(400f)
-        private val stayAnimation = SimpleAnimation(AnimationType.NONE).setDuration(500f)
-        private val fadeAnimation = SimpleAnimation(AnimationType.QUAD_IN).setDuration(400f)
+        private val showAnimation = SimpleAnimation.create().type(AnimationType.QUAD_OUT).duration(400f)
+        private val stayAnimation = SimpleAnimation.create().type(AnimationType.NONE).duration(500f)
+        private val fadeAnimation = SimpleAnimation.create().type(AnimationType.QUAD_IN).duration(400f)
 
-        private val yAnimation = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(200f)
+        private val yAnimation = SimpleAnimation.create().type(AnimationType.QUAD_OUT).duration(200f)
 
         private var stay = false
         private var fade = false
 
         init {
-            ScreenProject.screen?.let {
+            ScreenProject.resolution?.let {
                 this.xPos = it.width.toFloat()
                 updateYPos(it, true)
 
-                showAnimation.setStart(it.width.toFloat())
-                    .setTarget(it.width - width - 2f)
+                showAnimation.start(it.width.toFloat())
+                    .target(it.width - width - 2f)
                     .reset()
             }
         }
@@ -133,7 +133,7 @@ object NotificationsComponent : Component {
                 return
             }
 
-            yAnimation.setStart(yPos).setTarget(updatedY).reset()
+            yAnimation.start(yPos).target(updatedY).reset()
         }
 
         override fun render(event: EventRender2D) {
@@ -145,7 +145,7 @@ object NotificationsComponent : Component {
                 xPos = showAnimation.animate()
                 if (showAnimation.hasFinished()) {
                     stay = true
-                    stayAnimation.setTarget(event.windowResolution.width - width - 2f).reset()
+                    stayAnimation.target(event.windowResolution.width - width - 2f).reset()
                 }
             }
 
@@ -154,8 +154,8 @@ object NotificationsComponent : Component {
                 if (stayAnimation.hasFinished()) {
                     fade = true
                     stay = false
-                    fadeAnimation.setStart(event.windowResolution.width - width - 2f)
-                        .setTarget(event.windowResolution.width.toFloat()).reset()
+                    fadeAnimation.start(event.windowResolution.width - width - 2f)
+                        .target(event.windowResolution.width.toFloat()).reset()
                 }
             }
 
@@ -234,12 +234,12 @@ object NotificationsComponent : Component {
         fun calculateProcess(): Float {
             val total = showAnimation.duration + stayAnimation.duration + fadeAnimation.duration
             if (!stay && !fade) {
-                return showAnimation.watch.passTime / total
+                return showAnimation.tracker.elapsed / total
             }
             if (stay) {
-                return (showAnimation.duration + stayAnimation.watch.passTime) / total
+                return (showAnimation.duration + stayAnimation.tracker.elapsed) / total
             }
-            return (showAnimation.duration + stayAnimation.duration + fadeAnimation.watch.passTime) / total
+            return (showAnimation.duration + stayAnimation.duration + fadeAnimation.tracker.elapsed) / total
         }
 
         private fun getCurrentHeight(): Float {

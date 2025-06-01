@@ -3,11 +3,7 @@ package neko.sm.features.module.modules.combat
 import neko.sm.features.module.PluginModule
 import neko.sm.features.module.modules.combat.velocity.AntiVelocityBlocksMC
 import neko.sm.features.module.modules.combat.velocity.AntiVelocityCancel
-import neko.sm.utils.extension.cancel
-import neko.sm.utils.packet.server.SPacketVelocity
-import neko.sm.utils.packet.wrap
 import today.opai.api.enums.EnumModuleCategory
-import today.opai.api.events.EventPacketReceive
 
 /**
  * @author yuchenxue
@@ -27,13 +23,11 @@ object ModuleAntiVelocity : PluginModule(
         ), AntiVelocityCancel
     )
 
-    override fun onPacketReceive(event: EventPacketReceive) {
-        val packet = event.packet.wrap()
+    override fun onEnabled() {
+        mode.get().enable()
+    }
 
-        if (packet is SPacketVelocity && packet.entityId == API.localPlayer.entityId) {
-            mode.current.onVelocityReceive(packet) {
-                event.cancel()
-            }
-        }
+    override fun onDisabled() {
+        mode.get().disable()
     }
 }

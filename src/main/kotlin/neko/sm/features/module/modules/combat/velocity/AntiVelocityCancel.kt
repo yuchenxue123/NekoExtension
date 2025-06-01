@@ -1,6 +1,9 @@
 package neko.sm.features.module.modules.combat.velocity
 
-import today.opai.api.interfaces.game.network.server.SPacket12Velocity
+import neko.sm.utils.extension.cancel
+import neko.sm.utils.packet.server.SPacketVelocity
+import neko.sm.utils.packet.wrap
+import today.opai.api.events.EventPacketReceive
 
 /**
  * @author yuchenxue
@@ -8,7 +11,12 @@ import today.opai.api.interfaces.game.network.server.SPacket12Velocity
  */
 
 object AntiVelocityCancel : AntiVelocityMode("Cancel") {
-    override fun onVelocityReceive(packet: SPacket12Velocity, cancel: () -> Unit) {
-        cancel.invoke()
+
+    override fun onPacketReceive(event: EventPacketReceive) {
+        val packet = event.packet.wrap()
+
+        if (packet is SPacketVelocity && packet.entityId == player.entityId) {
+            event.cancel()
+        }
     }
 }

@@ -9,5 +9,5 @@ import today.opai.api.interfaces.modules.values.MultiBooleanValue
  * @date 2025/03/07
  */
 
-class MultiBooleanSetting(value: MultiBooleanValue) : Setting<List<Value<Boolean>>, MultiBooleanValue>(value) {
-}
+// no, this cant create through api
+class MultiBooleanSetting(value: MultiBooleanValue) : Setting<List<Value<Boolean>>, MultiBooleanValue>(value)

@@ -5,7 +5,7 @@ import neko.sm.client.module.getModeValue
 import neko.sm.client.module.set
 import neko.sm.features.module.PluginModule
 import neko.sm.utils.annotation.DontRegister
-import neko.sm.utils.time.TimeWatch
+import neko.sm.utils.time.TimeTracker
 import today.opai.api.enums.EnumModuleCategory
 import today.opai.api.interfaces.modules.PresetModule
 
@@ -26,7 +26,7 @@ object ModuleHelper : PluginModule(
 
     private var state = false
     private var checkNoMove = false
-    private val watch = TimeWatch()
+    private val watch = TimeTracker()
 
     override fun onKey(keyCode: Int) {
         val longJump = ModuleAccessor.LongJump
@@ -63,7 +63,7 @@ object ModuleHelper : PluginModule(
             watch.reset()
         }
 
-        if (longJump.isEnabled && checkNoMove && state && stop && watch.hasPassTime(1000L)) {
+        if (longJump.isEnabled && checkNoMove && state && stop && watch.hasPassedTime(1000L)) {
             setState(longJump, false)
             watch.reset()
         }

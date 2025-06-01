@@ -11,7 +11,7 @@ import neko.sm.value.values.ModeSetting
  */
 
 class ChoicesSetting<T : Choice>(
-    val parent: PluginModule,
+    val controller: PluginModule,
     name: String,
     val choices: Array<T>,
     value: T = choices[0],
@@ -22,7 +22,7 @@ class ChoicesSetting<T : Choice>(
     }
 ) {
 
-    var current: T = value
+    private var current: T = value
 
     init {
         // register
@@ -35,4 +35,6 @@ class ChoicesSetting<T : Choice>(
             current = find
         }
     }
+
+    fun get(): T = current
 }

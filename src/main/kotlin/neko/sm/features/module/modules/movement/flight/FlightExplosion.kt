@@ -1,4 +1,4 @@
-package neko.sm.features.module.modules.movement.fly
+package neko.sm.features.module.modules.movement.flight
 
 import neko.sm.utils.always.projects.MoveProject
 import neko.sm.utils.extension.cancel
@@ -17,7 +17,7 @@ import today.opai.api.interfaces.game.network.server.SPacket08SetPosition
  * @date 2025/03/15
  */
 
-object FlyExplosion : FlyMode("Explosion") {
+object FlightExplosion : FlightMode("Explosion") {
     private var fly = false
 
     override fun onPlayerUpdate() {

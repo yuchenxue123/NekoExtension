@@ -22,7 +22,7 @@ open class PluginModule(
     category: EnumModuleCategory
 ) : ExtensionModule(name, description, category), EventHandler, Accessor {
 
-    protected fun toggle() {
+    fun toggle() {
         isEnabled = !isEnabled
     }
 
@@ -232,7 +232,7 @@ open class PluginModule(
         it.choices.forEach { choice ->
             choice.values.forEach { value ->
                 value.displayable(displayable).displayable {
-                    it.current.modeName == choice.modeName
+                    it.get().modeName == choice.modeName
                 }
                 addValues(value.inner)
             }

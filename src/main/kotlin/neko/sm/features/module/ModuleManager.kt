@@ -2,7 +2,7 @@ package neko.sm.features.module
 
 import neko.sm.features.module.modules.combat.ModuleAntiVelocity
 import neko.sm.features.module.modules.misc.ModuleHelper
-import neko.sm.features.module.modules.movement.ModuleAirLine
+import neko.sm.features.module.modules.movement.ModuleFlight
 import neko.sm.features.module.modules.render.ModuleSimpleHUD
 import neko.sm.features.module.modules.render.ModuleSuperEyes
 import neko.sm.utils.annotation.DontRegister
@@ -23,7 +23,7 @@ object ModuleManager : Register<PluginModule>, Accessor {
             ModuleHelper,
             ModuleSuperEyes,
             ModuleAntiVelocity,
-            ModuleAirLine,
+            ModuleFlight,
         ).forEach(this::add)
 
         modules.forEach(this::register)

@@ -7,6 +7,7 @@ import neko.sm.utils.always.projects.TargetProject
 import neko.sm.utils.animation.AnimationType
 import neko.sm.utils.animation.SimpleAnimation
 import neko.sm.utils.extension.decimals
+import neko.sm.utils.extension.multiply
 import neko.sm.utils.extension.step
 import neko.sm.utils.render.RenderUtils
 import today.opai.api.interfaces.game.entity.LivingEntity
@@ -22,16 +23,16 @@ import kotlin.math.max
 object TargetWidget : PluginWidget("TargetHUD") {
 
     init {
-        this.x = 100f
-        this.y = 50f
+        this.x = 200f
+        this.y = 150f
     }
 
     private val font = FontManager.ROBOTO_20
     private val smallFont = FontManager.ROBOTO_16
 
     private var scale = 0.6f
-    private val animation = SimpleAnimation(AnimationType.QUAD_OUT).setDuration(150f)
-    private val healthAnimation = SimpleAnimation(AnimationType.QUAD_OUT).setStart(20f).setTarget(20f).setDuration(150f)
+    private val animation = SimpleAnimation.create().type(AnimationType.QUAD_OUT).duration(150f)
+    private val healthAnimation = SimpleAnimation.create().type(AnimationType.QUAD_OUT).start(20f).target(20f).duration(150f)
 
     private var show = false
     private var direction = false
@@ -43,9 +44,9 @@ object TargetWidget : PluginWidget("TargetHUD") {
             val oldValue = field
             if (value != oldValue) {
                 if (value > oldValue) {
-                    healthAnimation.setType(AnimationType.QUAD_OUT).setStart(oldValue).setTarget(value).reset()
+                    healthAnimation.type(AnimationType.QUAD_OUT).start(oldValue).target(value).reset()
                 } else {
-                    healthAnimation.setType(AnimationType.QUAD_IN).setStart(oldValue).setTarget(value).reset()
+                    healthAnimation.type(AnimationType.QUAD_IN).start(oldValue).target(value).reset()
                 }
 
             }
@@ -94,7 +95,7 @@ object TargetWidget : PluginWidget("TargetHUD") {
                         width,
                         height,
                         5,
-                        Color(40, 40, 40)
+                        Color(40, 40, 40).multiply(opacity = ModuleSimpleHUD.targetOpacity.toFloat())
                     )
 
                     val drawPlayer = entity?.let {
@@ -127,26 +128,29 @@ object TargetWidget : PluginWidget("TargetHUD") {
 
                     currentHeight += 24f + 6f
 
+                    // 应该是血条背景
                     RenderUtils.drawRoundRect(
                         x + 6f,
                         y + currentHeight,
                         width - 12f,
                         4f,
                         2,
-                        Color(0,0,0,200)
+                        Color(0,0,0,200).multiply(opacity = (ModuleSimpleHUD.targetOpacity.toFloat() * 1.2f).coerceAtMost(1f))
                     )
 
                     val process = entity?.let {
                         (healthAnimation.animate() / it.maxHealth).coerceAtMost(1f) * (width - 12f)
                     } ?: 0f
 
+
+                    // 应该是血条
                     RenderUtils.drawRoundRect(
                         x + 6f,
                         y + currentHeight,
                         process,
                         4f,
                         2,
-                        Color(119, 80,218,150)
+                        Color(119, 80,218,150).multiply(opacity = (ModuleSimpleHUD.targetOpacity.toFloat() * 1.2f).coerceAtMost(1f))
                     )
 
                     currentHeight += 4f + 6f
@@ -162,10 +166,10 @@ object TargetWidget : PluginWidget("TargetHUD") {
     private fun update(big: Boolean) {
         direction = big
         if (big) {
-            animation.setType(AnimationType.QUAD_OUT).setStart(scale).setTarget(1f).reset()
+            animation.type(AnimationType.QUAD_OUT).start(scale).target(1f).reset()
             show = true
         } else {
-            animation.setType(AnimationType.QUAD_IN).setStart(scale).setTarget(0.6f).reset()
+            animation.type(AnimationType.QUAD_IN).start(scale).target(0.6f).reset()
         }
     }
 
