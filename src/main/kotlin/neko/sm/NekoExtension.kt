@@ -25,13 +25,16 @@ class NekoExtension : Extension() {
         lateinit var openAPI: OpenAPI
         const val EXTENSION_NAME = "Neko"
         // 每次更新 +1
-        const val EXTENSION_VERSION = 18
+        const val EXTENSION_VERSION = 19
 
         lateinit var UPDATE_LOG: String
     }
 
     private fun lateInit() {
         UPDATE_LOG = ("更新日志" + "\n"
+
+                + "Update-0601" + "\n"
+                + "Target HUD 添加一个透明度选项 (opacity)" + "\n"
 
                 + "Update-0530" + "\n"
                 + "优化和复制代码" + "\n"
