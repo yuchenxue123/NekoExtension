@@ -6,12 +6,10 @@ import neko.sm.features.gui.component.ComponentManager
 import neko.sm.features.module.ModuleManager
 import neko.sm.features.widget.WidgetManager
 import neko.sm.font.FontManager
-import neko.sm.utils.always.AlwaysHandler
 import neko.sm.utils.always.ProjectManager
 import today.opai.api.Extension
 import today.opai.api.OpenAPI
 import today.opai.api.annotations.ExtensionInfo
-import today.opai.api.interfaces.EventHandler
 
 /**
  * @author yuchenxue
@@ -27,16 +25,15 @@ class NekoExtension : Extension() {
         const val EXTENSION_VERSION = 20
     }
 
-
     override fun initialize(api: OpenAPI) {
         openAPI = api
 
+        // init
         FontManager
         ModuleAccessor
 
         // handler
-        ProjectManager
-        handler(AlwaysHandler)
+        ProjectManager.initialize()
 
         // module
         ModuleManager.initialize()
@@ -49,9 +46,5 @@ class NekoExtension : Extension() {
 
         // component
         ComponentManager.initialize()
-    }
-
-    private fun handler(event: EventHandler) {
-        openAPI.registerEvent(event)
     }
 }

@@ -1,7 +1,6 @@
 package neko.sm.utils.always.projects
 
 import neko.sm.utils.always.Project
-import today.opai.api.interfaces.game.world.World
 
 /**
  * @author yuchenxue
@@ -9,30 +8,14 @@ import today.opai.api.interfaces.game.world.World
  */
 
 object WorldProject : Project {
+    private var exetute = true
 
-    private var firstLoad = true
-    var current: World? = null
+    private val handlers = mutableListOf<() -> Unit>()
 
-    // thing
-    private val list = mutableListOf<(WorldProject) -> Unit>()
-
-    override fun onTick() {
-        val updatedWorld = API.world
-
-        if (updatedWorld != current) {
-            current = updatedWorld
+    override fun onLoadWorld() {
+        if (exetute) {
+            handlers.forEach { it.invoke() }
+            exetute = false
         }
-
-        if (current != null && firstLoad) {
-            list.forEach { it.invoke(this) }
-            firstLoad = false
-        }
-    }
-
-    /**
-     * Run something at the first load
-     */
-    fun run(thing: (WorldProject) -> Unit) {
-        list.add(thing)
     }
 }

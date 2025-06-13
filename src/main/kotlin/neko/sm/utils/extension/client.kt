@@ -1,5 +1,6 @@
 package neko.sm.utils.extension
 
+import neko.sm.utils.always.projects.TickProject
 import neko.sm.utils.misc.API
 import neko.sm.utils.misc.world
 import today.opai.api.dataset.BlockPosition
@@ -65,6 +66,12 @@ val LivingEntity.moveDirection: Double
 
         return moveYaw.toRadians().toDouble()
     }
+
+val LocalPlayer.groundTicks
+    get() = TickProject.groundTicks
+
+val LocalPlayer.airTicks
+    get() = TickProject.airTicks
 
 val LocalPlayer.speed: Float
     get() = hypot(motionX, motionZ).toFloat()

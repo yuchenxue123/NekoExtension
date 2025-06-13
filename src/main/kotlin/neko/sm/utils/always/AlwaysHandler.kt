@@ -1,5 +1,6 @@
 package neko.sm.utils.always
 
+import neko.sm.utils.always.ProjectManager.projects
 import neko.sm.utils.interfaces.Accessor
 import today.opai.api.enums.EnumNotificationType
 import today.opai.api.events.*
@@ -13,17 +14,20 @@ import today.opai.api.interfaces.modules.PresetModule
 
 object AlwaysHandler : EventHandler, Accessor {
 
-    val realProjects = mutableListOf<Project>()
-
-    private val projects: MutableList<Project>
-        get() = realProjects.filter { it.isRunning }.toMutableList()
-
     override fun onTick() {
         projects.forEach(Project::onTick)
     }
 
     override fun onPlayerUpdate() {
         projects.forEach(Project::onPlayerUpdate)
+    }
+
+    override fun onLoop() {
+        projects.forEach(Project::onLoop)
+    }
+
+    override fun onLoadWorld() {
+        projects.forEach(Project::onLoadWorld)
     }
 
     override fun onRenderNameTags(event: EventRenderNameTag) {
@@ -41,14 +45,6 @@ object AlwaysHandler : EventHandler, Accessor {
 
     override fun onMotionUpdate(event: EventMotionUpdate) {
         projects.forEach { it.onMotionUpdate(event) }
-    }
-
-    override fun onLoop() {
-        projects.forEach(Project::onLoop)
-    }
-
-    override fun onLoadWorld() {
-        projects.forEach(Project::onLoadWorld)
     }
 
     override fun onModuleToggle(module: PresetModule, state: Boolean) {
@@ -80,11 +76,11 @@ object AlwaysHandler : EventHandler, Accessor {
     }
 
     override fun onChat(event: EventChatReceived) {
-        projects.forEach { it.onChat(event) }
+        projects.forEach { it.onChatReceive(event) }
     }
 
     override fun onChat(event: EventChatSend) {
-        projects.forEach { it.onChat(event) }
+        projects.forEach { it.onChatSend(event) }
     }
 
     override fun onPacketSend(event: EventPacketSend) {

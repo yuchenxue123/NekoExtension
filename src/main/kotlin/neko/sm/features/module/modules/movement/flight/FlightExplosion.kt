@@ -1,6 +1,6 @@
 package neko.sm.features.module.modules.movement.flight
 
-import neko.sm.utils.always.projects.MoveProject
+import neko.sm.utils.always.projects.TickProject
 import neko.sm.utils.extension.cancel
 import neko.sm.utils.extension.motionY
 import neko.sm.utils.extension.strafe
@@ -22,7 +22,7 @@ object FlightExplosion : FlightMode("Explosion") {
         val player = API.localPlayer ?: return
 
         if (!player.isOnGround && fly) {
-            val airTicks = MoveProject.airTicks
+            val airTicks = TickProject.airTicks
 
             if (airTicks <= 0) {
                 return

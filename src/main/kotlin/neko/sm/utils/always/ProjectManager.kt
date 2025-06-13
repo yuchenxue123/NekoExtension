@@ -1,32 +1,40 @@
 package neko.sm.utils.always
 
-import neko.sm.utils.always.projects.*
+import neko.sm.utils.always.projects.ScreenProject
+import neko.sm.utils.always.projects.TargetProject
+import neko.sm.utils.always.projects.TickProject
+import neko.sm.utils.always.projects.WorldProject
+import neko.sm.utils.interfaces.Accessor
 
 /**
  * @author yuchenxue
  * @date 2025/03/10
  */
 
-object ProjectManager {
+object ProjectManager : Accessor {
 
-    init {
+    private val _projects = mutableListOf<Project>()
+
+    val projects: MutableList<Project>
+        get() = _projects.filter { it.isRunning }.toMutableList()
+
+    fun initialize() {
         val projects = arrayOf(
             WorldProject,
             ScreenProject,
             TargetProject,
-            NotificationProject,
-            MoveProject,
-            TickProject
+            TickProject,
         )
-
         projects.forEach(this::add)
+
+        API.registerEvent(AlwaysHandler)
     }
 
-    private fun add(vararg projects: Project) {
-        AlwaysHandler.realProjects.addAll(projects)
+    fun add(vararg projects: Project) {
+        _projects.addAll(projects)
     }
 
     fun add(project: Project) {
-        AlwaysHandler.realProjects.add(project)
+        _projects.add(project)
     }
 }
