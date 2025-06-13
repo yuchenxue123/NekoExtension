@@ -30,7 +30,7 @@ object WorldProject : Project {
     }
 
     /**
-     * Run something at first load
+     * Run something at the first load
      */
     fun run(thing: (WorldProject) -> Unit) {
         list.add(thing)

@@ -1,7 +1,6 @@
 package neko.sm.features.command.commands
 
 import neko.sm.features.command.PluginCommand
-import neko.sm.features.gui.update.UpdateScreen
 
 /**
  * @author yuchenxue
@@ -14,7 +13,6 @@ object UpdateCommand : PluginCommand(
     ".update"
 ) {
     override fun onExecute(args: Array<String>) {
-        UpdateScreen.forceDisplay()
-//        API.displayScreen(NewUpdateScreen)
+        API.printMessage("This was deleted.")
     }
 }

@@ -15,6 +15,7 @@ import today.opai.api.interfaces.modules.special.*
 
 object ModuleAccessor : ModuleManager, Accessor {
     val LongJump: PresetModule = getModule("LongJump")
+    val Speed: PresetModule = getModule("Speed")
 
     // Special
     val AntiCheat: ModuleAntiCheat = getModule("AntiCheat") as ModuleAntiCheat

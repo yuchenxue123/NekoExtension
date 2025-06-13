@@ -2,10 +2,8 @@ package neko.sm.features.module.modules.movement.flight
 
 import neko.sm.utils.always.projects.MoveProject
 import neko.sm.utils.extension.cancel
-import neko.sm.utils.extension.motionX
 import neko.sm.utils.extension.motionY
-import neko.sm.utils.extension.motionZ
-import neko.sm.utils.move.Movement
+import neko.sm.utils.extension.strafe
 import neko.sm.utils.packet.client.CPacketPlayer
 import neko.sm.utils.packet.server.SPacketExplosion
 import neko.sm.utils.packet.wrap
@@ -33,19 +31,20 @@ object FlightExplosion : FlightMode("Explosion") {
             when (airTicks) {
                 in 1..4 -> {
                     player.motionY = 0.7 + 0.02 * airTicks
-                    Movement.strafe(0.56f)
+                    player.strafe(0.56f)
                 }
 
-                in 5..28 -> {
-                    player.motionX = 0.0
-                    player.motionY = 0.0
-                    player.motionZ = 0.0
-                    Movement.strafe(2.7774f - 2f / (airTicks - 3))
+                in 5..20 -> {
+                    player.strafe(2.7774f - 2f / (airTicks - 3))
                 }
 
                 else -> {
                     fly = false
                 }
+            }
+
+            if (player.isOnGround) {
+                fly = false
             }
         }
     }
