@@ -33,6 +33,16 @@ object RenderUtils : Accessor {
         API.renderUtil.drawRect(x, y, width, height, color)
     }
 
+    fun drawRect(
+        x: Double,
+        y: Double,
+        width: Double,
+        height: Double,
+        color: Color
+    ) {
+        drawRect(x.toFloat(), y.toFloat(), width.toFloat(), height.toFloat(), color)
+    }
+
     fun drawPlayerHead(
         x: Float,
         y: Float,

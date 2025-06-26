@@ -1,9 +1,9 @@
 package neko.sm.features.module.modules.render.supereyes.nametags
 
-import neko.sm.features.module.modules.render.ModuleSuperEyes.API
 import neko.sm.features.module.modules.render.ModuleSuperEyes.getRenderName
 import neko.sm.font.FontManager
 import neko.sm.utils.extension.step
+import neko.sm.utils.interfaces.Accessor
 import neko.sm.utils.render.RenderUtils
 import today.opai.api.interfaces.game.entity.Player
 import java.awt.Color
@@ -14,7 +14,7 @@ import kotlin.math.max
  * @date 2025/03/20
  */
 
-object NameTagRenders {
+object NameTagRenders : Accessor {
 
     fun renderSimpleNameTag(player: Player) {
         val big = FontManager.ROBOTO_22

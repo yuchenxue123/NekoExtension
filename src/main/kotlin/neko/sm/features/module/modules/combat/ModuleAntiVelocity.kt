@@ -16,16 +16,18 @@ object ModuleAntiVelocity : PluginModule(
     EnumModuleCategory.COMBAT
 ) {
 
-    val mode by choices("Mode", arrayOf(
+    val mode = choices("Mode", arrayOf(
         AntiVelocityCancel,
         AntiVelocityBlocksMC,
     ), AntiVelocityCancel)
 
+    private val _mode by mode
+
     override fun onEnabled() {
-        mode.enable()
+        _mode.enable()
     }
 
     override fun onDisabled() {
-        mode.disable()
+        _mode.disable()
     }
 }
